@@ -1,105 +1,43 @@
-# 生成 AI を触ってみましょう
+# RAG を触ってみましょう
 
 * **今回の環境はトレーニング内で使用する時間帯だけで利用できます。**
 
 ## テキストを生成してみましょう
-1. ページ上部で 「**テキスト生成**」を選択して下さい。
+1. ページ上部で 「**テキスト生成**」を選択して下さい。「**RAG 使用**」を**チェックしないまま**にしておいてください。
 1. 下記をコピーしてページ上部の入力エリアに貼り付けます。
-    - ```
-      生成 AI についてブログ記事を作成して下さい。
-      ```
+    ```
+   AnyCompany社では社員が結婚するときに何日間休暇をもらえますか？
+    ```
 
 1. [**生成**] をクリックします。
 
-1. 生成 AI に関するブログ記事が出力されることを確認します。
+1. 正確な回答が出力されないことを確認します。これはモデルが学習しているデータには AnyCompany社の休暇に関する情報がないためです。
 
+1. ページ上部で 「**テキスト生成**」を選択した状態で、「**RAG 使用**」を**チェックしてください**。
 
-## 要約してみましょう
-
-
-1. 下記をコピーしてページ上部の入力エリアに貼り付けます。
-
+1. ページ下側で下記のプロンプトを入力します。
     - ```
-      以下の文章を100文字程度に要約して下さい。
-
-      AWSは顧客からのすべてのフィードバックを受け、今日、私たちは AI 21ラボ、アンソロピック、スタビリティAI、そしてアマゾンのFMにAPIを介してアクセスできる新しいサービス「Amazon Bedrock」の発表を喜んで行います。
-      Bedrockは、顧客がFMを使用して生成AIベースのアプリケーションを構築およびスケーリングする最も簡単な方法であり、すべてのビルダーにアクセスを民主化します。
-      Bedrockは、スケーラブル、信頼性、セキュリティが高いAWS管理サービスを通じて、テキストと画像の強力なFM(アマゾンの新しい2つのLLMを含むTitan FMを含む)にアクセスする機能を提供します。
-      Bedrockのサーバーレス体験により、顧客は自分が行おうとしていることに適したモデルを簡単に見つけ、すぐに開始し、独自のデータでFMをプライベートにカスタマイズし、インフラストラクチャを管理する必要なく(Amazon SageMakerのMLの機能であるExperimentsを使って異なるモデルをテストしたり、Pipelinesを使ってFMを大規模に管理したりするインテグレーションを含む)、慣れ親しんだAWSのツールと機能を使ってそれらを簡単にアプリケーションに統合およびデプロイできます。
+      AnyCompany社では社員が結婚するときに何日間休暇が与えられますか？
       ```
-
 1. [**生成**] をクリックします。
-
-1. 要約された文章が出力されることを確認します。
-
-
-## 翻訳してみましょう
+1. モデルからの回答を確認します。**7日間** という回答が出力されるはずです。
+   - **これは、RAG を使用しており、AnyCompany社の休暇規定のドキュメントから結婚時の休暇の情報を取得して、モデルに問い合わせているためです。**
    
-1. 下記をコピーしてページ上部の入力エリアに貼り付けます。
-
+1. 他にも下記のようなプロンプトを試してみましょう
     - ```
-      以下の英文を日本語に翻訳して下さい。
-
-      AWS took all of that feedback from customers, and today we are excited to announce Amazon Bedrock, 
-      a new service that makes FMs from AI21 Labs, Anthropic, Stability AI, and Amazon accessible via an API. 
-      Bedrock is the easiest way for customers to build and scale generative AI-based applications using FMs, 
-      democratizing access for all builders. Bedrock will offer the ability to access a range of powerful FMs 
-      for text and images—including Amazons Titan FMs, which consist of two new LLMs we’re also announcing 
-      today—through a scalable, reliable, and secure AWS managed service. With Bedrock’s serverless experience, 
-      customers can easily find the right model for what they’re trying to get done, get started quickly, privately 
-      customize FMs with their own data, and easily integrate and deploy them into their applications using the AWS 
-      tools and capabilities they are familiar with, without having to manage any infrastructure (including integrations 
-      with Amazon SageMaker ML features like Experiments to test different models and Pipelines to manage their FMs at scale).
+      AnyCompany社の就業規則は労働基準法の第何条に基づいて規定されていますか？
       ```
-   　 
-   
-1. 翻訳された結果が日本語で表示されることを確認します。
+      - **第89条** と出力されるはずです。
+    - ```
+      AnyCompany社では社員が裁判員になった場合に休暇は与えられますか？
+      ```
+      - **必要な日数、必要な時間の休暇が与えられる** と出力されるはずです。
+    - ```
+      AnyCompany社では取得しなかった有給休暇は繰越すことができますか？
+      ```
+      - **付与日から1年以内に取得しなかった年次有給休暇は、付与日から2年以内に限り繰り越して取得可能** と出力されるはずです。
 
-## チャットで質問してみましょう
-
-1. 下記の質問をコピーしてページ上部の入力エリアに貼り付け、 [**生成**] をクリックして問い合わせてみましょう。
-
-    - 正しい回答が得られているかも確認してみましょう。
-    - 同じ質問を何度か繰り返してきいてみましょう。
-
-* 例1:
-     ```
-     ショッピングサイトで有名なAmazon社を創設したのは誰でしょう？
-     ```
-
-* 例2:
-    ```
-    明日は何日ですか？
-    ```
-
-* 例3:
-    ```
-   （ご自身の会社や組織）では社員が結婚するときに何日間休暇をもらえますか？
-    ```
-
-## 画像を生成してみましょう
-
-1. ページ上部で 「**画像生成**」を選択して下さい。
-
-1. 下記をコピーしてページ上部の入力エリアに貼り付け、「**生成**」ボタンをクリックして下さい。
-     ```
-     a sleeping cat.
-     ```
-
-
-## マルチモーダルの処理を試してみましょう
-
-1. [こちら](https://dl39k3l39to9h.cloudfront.net/cat.jpg) を右クリックして、リンク先を保存し、猫の画像: **cat.jpg** をダウンロードして下さい。
-1. ページ上部で 「**テキスト生成**」を選択して下さい。
-1. 下記をコピーしてページ上部の入力エリアに貼り付けます。
-    ```
-    添付の画像の内容について説明して下さい。
-    ```
-1. デモアプリで、入力エリアの下側にある **添付** ボタン をクリックします。
-1. ダウンロードした **cat.jpg** を選択します。
-1. [**生成**] をクリックします。
-1. 画像の内容を説明しているテキストが生成されたことを確認します。
-
+1. **RAG により企業の独自のデータを使用して基盤モデルに問い合わせを行えることを確認しました。**
 
 
 
